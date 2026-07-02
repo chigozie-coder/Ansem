@@ -29,7 +29,9 @@
 
     <header class="site-header" data-glass>
       <a href="#home" class="brand" aria-label="Ansem home">
-        <span class="brand-mark">A</span>
+        <span class="brand-mark">
+          <img src="assets/reference-bull.png" alt="" />
+        </span>
         <span>
           <strong>ANSEM</strong>
           <small>@blknoiz06</small>
@@ -40,6 +42,7 @@
         <a href="#token">$ANSEM</a>
         <a href="#ecosystem">Ecosystem</a>
         <a href="#creators">Creators</a>
+        <a href="#paparazzi">Paparazzi</a>
         <a href="#radio">Radio</a>
       </nav>
       <div class="header-actions">
@@ -54,14 +57,25 @@
 
     <main id="home">
       <section class="hero section-snap" data-section="hero">
+        <div class="paparazzi-pack" aria-hidden="true">
+          <span class="camera cam-a"></span>
+          <span class="camera cam-b"></span>
+          <span class="camera cam-c"></span>
+          <span class="flash flash-a"></span>
+          <span class="flash flash-b"></span>
+          <span class="flash flash-c"></span>
+        </div>
         <div class="hero-copy">
           <p class="handle">@BLKNOIZ06 / THE BLACK BULL</p>
-          <h1>ANSEM</h1>
-          <h2>BLACK BULL MODE</h2>
+          <div class="hero-title-stack">
+            <h1 class="ansem-3d" data-text="ANSEM">ANSEM</h1>
+            <h2>THE BLACK BULL</h2>
+          </div>
           <blockquote>"we are going to make crypto cool to normies this time around"</blockquote>
+          <p class="curated-line">Curated by Chigozie (UBAH)</p>
           <p class="hero-text">
             Software engineer turned Solana signal, boxing-ring discipline, meme-market instinct,
-            and a creator-first community engine built for the trenches.
+            coldest nigga breathing, and a creator-first community engine built for the trenches.
           </p>
         <div class="hero-actions">
           <a class="primary-button magnetic" href="#token">Enter the trenches</a>
@@ -280,6 +294,48 @@
         </div>
       </section>
 
+      <section class="paparazzi-section section-snap" id="paparazzi" data-section="paparazzi">
+        <div class="section-heading wide">
+          <p>PAPARAZZI WALL</p>
+          <h2>Every flash caught the bull.</h2>
+          <span>
+            Ringside shutters, timeline clips, market-room screenshots, creator edits, and flashbulb proof that the room is watching.
+          </span>
+        </div>
+        <div class="paparazzi-grid" aria-label="Paparazzi media wall">
+          <article class="photo-tile lead-shot">
+            <span>Front row</span>
+            <h3>Black bull walkout</h3>
+            <p>Cameras low, horns high, green flash bouncing off every lens in the pit.</p>
+          </article>
+          <article class="photo-tile">
+            <span>Shutter 01</span>
+            <h3>Crypto fight night</h3>
+            <p>Gloves, lights, crowd noise, and timeline pressure.</p>
+          </article>
+          <article class="photo-tile">
+            <span>Shutter 02</span>
+            <h3>Chart swarm</h3>
+            <p>Every candle gets a flash. Every wick gets clipped.</p>
+          </article>
+          <article class="photo-tile quote-shot">
+            <span>Quote wire</span>
+            <h3>"Coldest nigga breathing."</h3>
+            <p>Bio line stamped like a headline across the media barricade.</p>
+          </article>
+          <article class="photo-tile">
+            <span>Shutter 03</span>
+            <h3>Creator alley</h3>
+            <p>Edits, memes, cuts, and airdrop hunters posted outside.</p>
+          </article>
+          <article class="photo-tile wide-shot">
+            <span>Back page</span>
+            <h3>Curated by Chigozie (UBAH)</h3>
+            <p>The fan wall is signed, wired, and ready for another flash.</p>
+          </article>
+        </div>
+      </section>
+
       <section class="radio-section section-snap" id="radio" data-section="radio">
         <div class="radio-console" data-glass>
           <div class="radio-left">
@@ -305,7 +361,7 @@
 
     <footer class="site-footer">
       <span>Fan-made interactive concept. Not financial advice.</span>
-      <span>Sources: DexScreener, CoinGecko, public social profiles, supplied research notes.</span>
+      <span>Curated by Chigozie (UBAH). Sources: DexScreener, CoinGecko, public social profiles, supplied research notes.</span>
     </footer>
 
     <aside class="sticky-buy" id="sticky-buy" aria-label="$ANSEM buy actions">

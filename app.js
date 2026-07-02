@@ -123,8 +123,23 @@ const coinRain = (count = 24) => {
   }
 };
 
+const paparazziFlash = (count = 1) => {
+  for (let i = 0; i < count; i += 1) {
+    const flash = document.createElement("span");
+    flash.className = "flash-burst";
+    flash.style.left = `${8 + Math.random() * 84}vw`;
+    flash.style.top = `${12 + Math.random() * 64}vh`;
+    flash.style.animationDelay = `${Math.random() * 140}ms`;
+    document.body.appendChild(flash);
+    window.setTimeout(() => flash.remove(), 850);
+  }
+};
+
+window.setInterval(() => paparazziFlash(1 + Math.round(Math.random())), 3600);
+
 $("#rain-button")?.addEventListener("click", () => {
   coinRain(42);
+  paparazziFlash(7);
   showToast("Airdrop wall activated");
 });
 
