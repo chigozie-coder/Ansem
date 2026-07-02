@@ -546,6 +546,21 @@ main,
   text-transform: uppercase;
 }
 
+.curated-line a,
+.photo-tile h3 a,
+.site-footer a {
+  color: inherit;
+}
+
+.curated-line a:hover,
+.photo-tile h3 a:hover,
+.site-footer a:hover {
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 .hero-actions {
   flex-wrap: wrap;
   gap: 12px;
@@ -1182,6 +1197,44 @@ main,
   z-index: 1;
 }
 
+.banner-download {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid rgba(157, 255, 34, 0.72);
+  border-radius: 6px;
+  background: rgba(5, 12, 7, 0.88);
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-8px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 28px rgba(157, 255, 34, 0.22);
+  transition: opacity 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.movement-banner:hover .banner-download,
+.movement-banner:focus-within .banner-download {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.banner-download:hover,
+.banner-download:focus-visible {
+  background: var(--green);
+  color: #071005;
+  outline: none;
+}
+
 .movement-banner span {
   color: var(--green);
   font-family: var(--mono);
@@ -1772,6 +1825,13 @@ main,
   .movement-banner,
   .feature-banner {
     min-height: 250px;
+  }
+
+  .banner-download {
+    top: 12px;
+    right: 12px;
+    opacity: 1;
+    transform: none;
   }
 
   .paparazzi-pack {
