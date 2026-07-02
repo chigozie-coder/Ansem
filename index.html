@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A cinematic 3D fan experience for Ansem, @blknoiz06, and The Black Bull $ANSEM movement."
+    />
+    <title>Ansem | Black Bull Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://esm.sh/three@0.165.0"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="bull-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-flash" id="cursor-flash"></div>
+
+    <header class="site-header" data-glass>
+      <a href="#home" class="brand" aria-label="Ansem home">
+        <span class="brand-mark">A</span>
+        <span>
+          <strong>ANSEM</strong>
+          <small>@blknoiz06</small>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#story">Story</a>
+        <a href="#token">$ANSEM</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#creators">Creators</a>
+        <a href="#radio">Radio</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" id="sound-toggle" type="button" aria-label="Toggle sound" data-tooltip="Sound">
+          <span class="eq-mini" aria-hidden="true"><i></i><i></i><i></i></span>
+        </button>
+        <a class="header-cta" href="https://dexscreener.com/solana/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">
+          Chart
+        </a>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero section-snap" data-section="hero">
+        <div class="hero-copy">
+          <p class="handle">@BLKNOIZ06 / THE BLACK BULL</p>
+          <h1>ANSEM</h1>
+          <h2>BLACK BULL MODE</h2>
+          <blockquote>"we are going to make crypto cool to normies this time around"</blockquote>
+          <p class="hero-text">
+            Software engineer turned Solana signal, boxing-ring discipline, meme-market instinct,
+            and a creator-first community engine built for the trenches.
+          </p>
+        <div class="hero-actions">
+          <a class="primary-button magnetic" href="#token">Enter the trenches</a>
+          <a class="primary-button buy-button magnetic" href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Buy $ANSEM</a>
+          <button class="secondary-button magnetic" id="copy-ca" type="button">
+            <span>CA:</span>
+            <strong>9cRC...TGpump</strong>
+          </button>
+          </div>
+          <div class="social-row" aria-label="Social links">
+            <a href="https://x.com/blknoiz06" target="_blank" rel="noreferrer" aria-label="Ansem on X">X</a>
+            <a href="https://substack.com/@ansem" target="_blank" rel="noreferrer" aria-label="Ansem newsletter">Substack</a>
+            <a href="https://x.com/BullpenFi" target="_blank" rel="noreferrer" aria-label="BullpenFi on X">Bullpen</a>
+            <a href="https://x.com/MarketBubble" target="_blank" rel="noreferrer" aria-label="MarketBubble on X">Bubble</a>
+          </div>
+        </div>
+        <aside class="hero-panel" data-tilt>
+          <div class="panel-topline">
+            <span>Signal</span>
+            <b id="live-dot">Live</b>
+          </div>
+          <div class="terminal-lines" aria-label="Live market feed">
+            <span>bull strength: <b id="hero-strength">syncing</b></span>
+            <span>24h flow: <b id="hero-volume">syncing</b></span>
+            <span>mode: <b>full send</b></span>
+          </div>
+          <div class="bull-glyph">
+            <img src="assets/reference-bull.png" alt="Black chrome bull reference art" />
+          </div>
+        </aside>
+        <div class="scroll-cue" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="token-section section-snap" id="token" data-section="token">
+        <div class="section-heading">
+          <p>$ANSEM LIVE</p>
+          <h2>The Black Bull</h2>
+          <span>Solana memecoin market console, powered by live DexScreener data when available.</span>
+        </div>
+        <div class="token-grid">
+          <article class="market-console" data-glass>
+            <div class="token-title">
+              <div class="token-logo">BB</div>
+              <div>
+                <h3>The Black Bull</h3>
+                <p>$ANSEM / Solana</p>
+              </div>
+              <a href="https://www.blackbullsol.com/" target="_blank" rel="noreferrer">Official</a>
+            </div>
+            <div class="contract-row">
+              <span id="contract-address">9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump</span>
+              <button type="button" id="copy-ca-2" aria-label="Copy contract address">Copy</button>
+            </div>
+            <div class="chart-tabs" role="tablist" aria-label="Market ranges">
+              <button class="is-active" type="button">24H</button>
+              <button type="button">6H</button>
+              <button type="button">1H</button>
+              <button type="button">5M</button>
+            </div>
+            <svg class="sparkline" id="sparkline" viewBox="0 0 900 300" role="img" aria-label="Synthetic live market sparkline">
+              <defs>
+                <linearGradient id="sparkFill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#9dff22" stop-opacity="0.55" />
+                  <stop offset="1" stop-color="#9dff22" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path id="spark-area" d=""></path>
+              <path id="spark-line" d=""></path>
+              <g id="volume-bars"></g>
+            </svg>
+          </article>
+
+          <article class="price-card" data-glass>
+            <p>Price</p>
+            <strong id="price-usd">$0.0000</strong>
+            <span id="price-change">-- 24H</span>
+            <dl>
+              <div><dt>Market cap</dt><dd id="market-cap">--</dd></div>
+              <div><dt>Liquidity</dt><dd id="liquidity">--</dd></div>
+              <div><dt>Volume 24H</dt><dd id="volume-24h">--</dd></div>
+              <div><dt>Txns 24H</dt><dd id="txns-24h">--</dd></div>
+            </dl>
+            <a class="primary-button block" href="https://dexscreener.com/solana/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">
+              View live chart
+            </a>
+            <a class="secondary-button block buy-route" href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">
+              Buy on Jupiter
+            </a>
+          </article>
+
+          <article class="strength-card" data-glass>
+            <div class="ring-meter" style="--score: 82">
+              <span id="strength-score">82%</span>
+            </div>
+            <h3>Black Bull Strength</h3>
+            <p id="strength-copy">Calculating community pressure from live market activity.</p>
+            <div class="mini-stat">
+              <span>Pair</span>
+              <b id="pair-name">Dex loading</b>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="conversion-section section-snap" id="buy" data-section="buy">
+        <div class="conversion-shell" data-glass>
+          <div class="section-heading">
+            <p>BULL QUEST</p>
+            <h2>Three taps from spectator to holder.</h2>
+            <span>
+              The page is built like a mini-game because attention converts when the route is obvious:
+              copy the mint, inspect the chart, then open the swap.
+            </span>
+          </div>
+          <div class="quest-grid">
+            <button class="quest-card" type="button" data-quest="copy">
+              <span>01</span>
+              <h3>Copy the CA</h3>
+              <p>Put the verified Solana mint on your clipboard.</p>
+              <b>Copy</b>
+            </button>
+            <a class="quest-card" href="https://dexscreener.com/solana/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer" data-quest="chart">
+              <span>02</span>
+              <h3>Read the chart</h3>
+              <p>Volume, liquidity, transactions, and market pressure in one place.</p>
+              <b>Open</b>
+            </a>
+            <a class="quest-card is-final" href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer" data-quest="buy">
+              <span>03</span>
+              <h3>Enter black bull mode</h3>
+              <p>Open Jupiter with SOL routed into $ANSEM.</p>
+              <b>Buy</b>
+            </a>
+          </div>
+          <div class="conviction-meter" aria-label="Conversion progress">
+            <span id="quest-progress" style="width: 18%"></span>
+          </div>
+          <p class="risk-note">
+            Memecoins are volatile. The site makes the path fun, not risk-free.
+          </p>
+        </div>
+      </section>
+
+      <section class="story-section section-snap" id="story" data-section="story">
+        <div class="section-heading wide">
+          <p>THE ANSEM STORY</p>
+          <h2>From building code to building culture.</h2>
+          <span>
+            Public profile fragments point to a Georgia Tech computer science path, Capital One engineering,
+            early crypto conviction, boxing discipline, and a Solana-native community voice.
+          </span>
+        </div>
+        <div class="timeline" aria-label="Ansem timeline">
+          <article data-step="01">
+            <h3>Georgia Tech</h3>
+            <p>Computer science foundation, math-minded, introduced to Bitcoin during the emerging-tech era.</p>
+          </article>
+          <article data-step="02">
+            <h3>Engineer</h3>
+            <p>Full-stack work and finance context shaped a builder's lens before full-time markets.</p>
+          </article>
+          <article data-step="03">
+            <h3>The Ring</h3>
+            <p>Crypto Fight Night energy: discipline, confidence, pressure, and public performance.</p>
+          </article>
+          <article class="is-hot" data-step="04">
+            <h3>Solana Guy</h3>
+            <p>Early SOL conviction, memecoin market read, and a loud thesis for onchain retail culture.</p>
+          </article>
+          <article data-step="05">
+            <h3>Community</h3>
+            <p>Rewards creators, backs viral content, and turns market calls into social momentum.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="ecosystem-section section-snap" id="ecosystem" data-section="ecosystem">
+        <div class="section-heading">
+          <p>BUILT WITH THE REAL ONES</p>
+          <h2>Trading floor, bubble room, content machine.</h2>
+        </div>
+        <div class="ecosystem-grid">
+          <a class="eco-panel bullpen" href="https://x.com/BullpenFi" target="_blank" rel="noreferrer" data-tilt>
+            <span>BullpenFi</span>
+            <h3>Onchain arena</h3>
+            <p>Trading competitions, Hyperliquid and Solana energy, social alpha, and arena-style conviction.</p>
+          </a>
+          <a class="eco-panel bubble" href="https://x.com/MarketBubble" target="_blank" rel="noreferrer" data-tilt>
+            <span>MarketBubble</span>
+            <h3>Where the bubble talks</h3>
+            <p>Streams, podcast conversations, market psychology, and the culture loop around the next wave.</p>
+          </a>
+          <a class="eco-panel blackbull" href="https://x.com/blackbullsol" target="_blank" rel="noreferrer" data-tilt>
+            <span>The Black Bull</span>
+            <h3>Community token</h3>
+            <p>A Pump.fun-born Solana tribute token with creator energy, airdrop mythology, and holder momentum.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="creator-section section-snap" id="creators" data-section="creators">
+        <div class="section-heading row-heading">
+          <div>
+            <p>CREATOR AIRDROP WALL</p>
+            <h2>The content engine never sleeps.</h2>
+          </div>
+          <button class="primary-button magnetic" id="rain-button" type="button">Make it rain</button>
+        </div>
+        <div class="creator-track" aria-label="Creator wall">
+          <article><span>@clipboss</span><b>12,500 pts</b><small>Video cutter</small></article>
+          <article><span>@xthreader</span><b>9,800 pts</b><small>Thread writer</small></article>
+          <article><span>@basedbrush</span><b>7,420 pts</b><small>Meme lord</small></article>
+          <article class="you-card"><span>You could be next</span><b>Full send</b><small>Earn points</small></article>
+          <article><span>@chartmage</span><b>6,900 pts</b><small>Chart artist</small></article>
+          <article><span>@floorvoice</span><b>5,210 pts</b><small>Spaces host</small></article>
+        </div>
+      </section>
+
+      <section class="radio-section section-snap" id="radio" data-section="radio">
+        <div class="radio-console" data-glass>
+          <div class="radio-left">
+            <button class="play-button" id="radio-toggle" type="button" aria-label="Play original trenches radio beat">
+              <span></span>
+            </button>
+            <div>
+              <p>TRENCHES RADIO</p>
+              <h2>Original visualizer mode</h2>
+              <small>No copyrighted track, just browser-synth pressure for the bull run.</small>
+            </div>
+          </div>
+          <canvas id="visualizer" width="680" height="170" aria-hidden="true"></canvas>
+          <div class="radio-right">
+            <label for="intensity">Intensity</label>
+            <input id="intensity" type="range" min="0" max="100" value="72" />
+            <label for="trails">Trails</label>
+            <input id="trails" type="range" min="0" max="100" value="56" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Fan-made interactive concept. Not financial advice.</span>
+      <span>Sources: DexScreener, CoinGecko, public social profiles, supplied research notes.</span>
+    </footer>
+
+    <aside class="sticky-buy" id="sticky-buy" aria-label="$ANSEM buy actions">
+      <div>
+        <b>$ANSEM</b>
+        <span id="sticky-price">Live price syncing</span>
+      </div>
+      <button type="button" id="sticky-copy">Copy CA</button>
+      <a href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Buy</a>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
