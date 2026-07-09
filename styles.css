@@ -1878,3 +1878,212 @@ main,
     transition-duration: 1ms !important;
   }
 }
+
+.intel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 18px;
+}
+
+.intel-card {
+  position: relative;
+  min-height: 330px;
+  padding: 22px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.intel-card::before {
+  position: absolute;
+  inset: -30% -20% auto auto;
+  width: 280px;
+  height: 280px;
+  content: "";
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 255, 34, 0.18), transparent 66%);
+  pointer-events: none;
+}
+
+.intel-kicker {
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.intel-card h3,
+.game-copy h2 {
+  margin: 12px 0 10px;
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 5.4rem);
+  line-height: 0.88;
+}
+
+.intel-card p,
+.game-copy span,
+.game-stage p {
+  color: rgba(243, 247, 236, 0.68);
+  line-height: 1.6;
+}
+
+.intel-list {
+  display: grid;
+  gap: 11px;
+  margin: 22px 0;
+}
+
+.intel-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.intel-list dt,
+.intel-list dd,
+.game-stats small {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.intel-list dt { color: var(--muted); }
+.intel-list dd { margin: 0; color: var(--green); font-weight: 900; }
+
+.holder-bars {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  height: 128px;
+  margin: 28px 0;
+}
+
+.holder-bars span {
+  flex: 1;
+  height: var(--h);
+  min-height: 18px;
+  border: 1px solid rgba(157, 255, 34, 0.26);
+  background: linear-gradient(180deg, var(--green), rgba(157, 255, 34, 0.08));
+  box-shadow: 0 0 24px rgba(157, 255, 34, 0.18);
+}
+
+.bubble-map { grid-row: span 2; }
+.safety-card { grid-column: span 2; min-height: 240px; }
+
+.bubble-orbit {
+  position: relative;
+  height: 260px;
+  margin: 20px 0;
+  border: 1px solid rgba(157, 255, 34, 0.16);
+  background:
+    radial-gradient(circle at center, rgba(157, 255, 34, 0.12), transparent 28%),
+    linear-gradient(rgba(157, 255, 34, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 255, 34, 0.05) 1px, transparent 1px);
+  background-size: auto, 42px 42px, 42px 42px;
+}
+
+.bubble-orbit button {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border: 1px solid rgba(157, 255, 34, 0.62);
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.52), rgba(157,255,34,0.26) 34%, rgba(2,4,2,0.82) 70%);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.bubble-orbit button:hover,
+.bubble-orbit button.is-popped {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 0 34px rgba(157, 255, 34, 0.42);
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li {
+  padding: 14px;
+  border: 1px solid rgba(157, 255, 34, 0.16);
+  background: rgba(0, 0, 0, 0.22);
+  color: rgba(243, 247, 236, 0.74);
+}
+
+.checklist li::before {
+  margin-right: 9px;
+  color: var(--green);
+  content: "✓";
+}
+
+.game-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.48fr) minmax(360px, 1fr);
+  gap: 24px;
+  padding: clamp(20px, 4vw, 38px);
+  border-radius: 8px;
+}
+
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.game-stats div {
+  padding: 16px;
+  border: 1px solid rgba(157, 255, 34, 0.18);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.game-stats b {
+  display: block;
+  color: var(--green);
+  font-family: var(--display);
+  font-size: 46px;
+  line-height: 0.9;
+}
+
+.game-stats small { color: var(--muted); }
+.game-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.game-stage canvas {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  border: 1px solid rgba(157, 255, 34, 0.28);
+  background: #020402;
+  box-shadow: inset 0 0 40px rgba(157, 255, 34, 0.08), 0 0 42px rgba(157, 255, 34, 0.14);
+}
+
+@media (max-width: 1060px) {
+  .intel-grid,
+  .game-shell { grid-template-columns: 1fr; }
+  .bubble-map,
+  .safety-card { grid-column: auto; grid-row: auto; }
+}
+
+@media (max-width: 640px) {
+  .checklist { grid-template-columns: 1fr; }
+  .game-stats { grid-template-columns: 1fr; }
+}
+
+#game-buy.is-unlocked {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 30px rgba(255, 215, 111, 0.24);
+}

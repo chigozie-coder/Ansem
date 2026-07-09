@@ -24,6 +24,12 @@ const formatUsd = (value) => {
   return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 };
 
+const formatDate = (value) => {
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0) return "--";
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(n));
+};
+
 const compact = (value) => {
   const n = Number(value);
   if (!Number.isFinite(n)) return "--";
@@ -227,12 +233,21 @@ const hydrateMarket = async () => {
         ? "Momentum is green, liquidity is visible, and the chart is doing the selling before the button does."
         : "The bull is cooling off, but the live panel keeps the trenches honest.";
     $("#pair-name").textContent = `${pair.dexId.toUpperCase()} / ${pair.quoteToken?.symbol || "SOL"}`;
+    $("#pool-pair").textContent = `${pair.baseToken?.symbol || "ANSEM"} / ${pair.quoteToken?.symbol || "SOL"}`;
+    $("#pool-dex").textContent = pair.dexId?.toUpperCase() || "SOLANA DEX";
+    $("#pool-liquidity").textContent = `$${compact(pair.liquidity?.usd)}`;
+    $("#pool-fdv").textContent = `$${compact(pair.fdv || pair.marketCap)}`;
+    $("#pool-created").textContent = formatDate(pair.pairCreatedAt);
+    $("#holder-count").textContent = `${compact(Math.max(420, Math.round(txns * 7.6)))} active watchers`;
     buildSparkline(Math.max(0.35, Math.min(0.95, state.marketPulse)));
   } catch (error) {
     $("#live-dot").textContent = "Cached";
     $("#hero-strength").textContent = "82%";
     $("#hero-volume").textContent = "API cooling";
     $("#strength-copy").textContent = "DexScreener did not answer, so the page is showing fallback momentum UI.";
+    $("#pool-dex").textContent = "Cached";
+    $("#pool-liquidity").textContent = "API cooling";
+    $("#holder-count").textContent = "Trench watchers";
   }
 };
 
@@ -521,3 +536,146 @@ const drawVisualizer = () => {
 };
 
 drawVisualizer();
+
+$$('#bubble-orbit button').forEach((bubble) => {
+  bubble.addEventListener('click', () => {
+    bubble.classList.toggle('is-popped');
+    completeQuest('chart');
+    showToast(`${bubble.textContent.trim()} cluster tagged`);
+  });
+});
+
+const initBullGame = () => {
+  const canvas = $('#bull-game');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const scoreNode = $('#game-score');
+  const streakNode = $('#game-streak');
+  const bestNode = $('#game-best');
+  const buyNode = $('#game-buy');
+  const game = {
+    running: false,
+    score: 0,
+    streak: 0,
+    best: Number(localStorage.getItem('blackBullBest') || 0),
+    bull: { x: 120, y: canvas.height / 2, vy: 0 },
+    targetY: canvas.height / 2,
+    items: [],
+    lastSpawn: 0,
+    keys: new Set(),
+  };
+
+  bestNode.textContent = game.best;
+
+  const updateHud = () => {
+    scoreNode.textContent = game.score;
+    streakNode.textContent = `${game.streak}x`;
+    bestNode.textContent = game.best;
+    buyNode.textContent = game.streak >= 7 ? 'Buy boost unlocked' : 'Unlock buy boost';
+    buyNode.classList.toggle('is-unlocked', game.streak >= 7);
+  };
+
+  const spawn = (time) => {
+    if (time - game.lastSpawn < Math.max(420, 900 - game.score * 4)) return;
+    game.lastSpawn = time;
+    game.items.push({
+      x: canvas.width + 30,
+      y: 42 + Math.random() * (canvas.height - 84),
+      r: 14 + Math.random() * 10,
+      bad: Math.random() < 0.28,
+      speed: 3.2 + Math.random() * 2.6 + game.score / 90,
+    });
+  };
+
+  const drawGrid = (time) => {
+    ctx.fillStyle = '#020402';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(157,255,34,0.12)';
+    ctx.lineWidth = 1;
+    const offset = (time / 30) % 48;
+    for (let x = -offset; x < canvas.width; x += 48) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += 48) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+  };
+
+  const drawBull = () => {
+    const { x, y } = game.bull;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.fillStyle = '#060906';
+    ctx.strokeStyle = '#9dff22';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 46, 25, 0, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(42, -6, 25, 18, 0, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#9dff22';
+    ctx.beginPath(); ctx.moveTo(54, -22); ctx.lineTo(88, -44); ctx.lineTo(67, -13); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(54, 8); ctx.lineTo(88, 28); ctx.lineTo(66, 10); ctx.fill();
+    ctx.fillRect(-22, 18, 10, 24); ctx.fillRect(18, 16, 10, 25);
+    ctx.restore();
+  };
+
+  const loop = (time = 0) => {
+    drawGrid(time);
+    if (game.running) {
+      spawn(time);
+      if (game.keys.has('ArrowUp')) game.targetY -= 7;
+      if (game.keys.has('ArrowDown')) game.targetY += 7;
+      game.targetY = Math.max(42, Math.min(canvas.height - 42, game.targetY));
+      game.bull.y += (game.targetY - game.bull.y) * 0.12;
+      game.items.forEach((item) => { item.x -= item.speed; });
+      game.items = game.items.filter((item) => item.x > -40);
+      game.items.forEach((item) => {
+        const hit = Math.hypot(item.x - game.bull.x - 30, item.y - game.bull.y) < item.r + 32;
+        if (!hit) return;
+        item.x = -999;
+        if (item.bad) {
+          game.streak = 0;
+          game.score = Math.max(0, game.score - 3);
+          showToast('Red rug dodged your conviction');
+        } else {
+          game.score += 5 + game.streak;
+          game.streak += 1;
+          if (game.streak === 7) { completeQuest('buy'); coinRain(18); }
+        }
+        game.best = Math.max(game.best, game.score);
+        localStorage.setItem('blackBullBest', String(game.best));
+        updateHud();
+      });
+    }
+
+    game.items.forEach((item) => {
+      ctx.fillStyle = item.bad ? '#ff355d' : '#9dff22';
+      ctx.shadowColor = item.bad ? '#ff355d' : '#9dff22';
+      ctx.shadowBlur = 18;
+      ctx.fillRect(item.x - item.r / 2, item.y - item.r, item.r, item.r * 2);
+      ctx.shadowBlur = 0;
+    });
+    drawBull();
+    requestAnimationFrame(loop);
+  };
+
+  canvas.addEventListener('pointermove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    game.targetY = ((event.clientY - rect.top) / rect.height) * canvas.height;
+  });
+  window.addEventListener('keydown', (event) => game.keys.add(event.key));
+  window.addEventListener('keyup', (event) => game.keys.delete(event.key));
+  $('#start-game')?.addEventListener('click', () => {
+    game.running = true;
+    game.score = 0;
+    game.streak = 0;
+    game.items = [];
+    updateHud();
+    showToast('Black Bull Run started');
+  });
+  loop();
+};
+
+initBullGame();

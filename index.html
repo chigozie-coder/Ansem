@@ -41,6 +41,8 @@
         <a href="#story">Story</a>
         <a href="#token">$ANSEM</a>
         <a href="#ecosystem">Ecosystem</a>
+        <a href="#intel">Intel</a>
+        <a href="#game">Bull Run</a>
         <a href="#creators">Creators</a>
         <a href="#paparazzi">Paparazzi</a>
         <a href="#radio">Radio</a>
@@ -220,6 +222,85 @@
           <p class="risk-note">
             Memecoins are volatile. The site makes the path fun, not risk-free.
           </p>
+        </div>
+      </section>
+
+      <section class="intel-section section-snap" id="intel" data-section="intel">
+        <div class="section-heading wide">
+          <p>FULL TOKEN INTEL</p>
+          <h2>One dashboard before you ape.</h2>
+          <span>
+            Live market stats blend with holder, liquidity, pool, bubble-map, and safety checkpoints so every visitor has a clear route from research to chart to Jupiter.
+          </span>
+        </div>
+        <div class="intel-grid">
+          <article class="intel-card liquidity-card" data-glass>
+            <div class="intel-kicker">Liquidity pool</div>
+            <h3 id="pool-pair">ANSEM / SOL</h3>
+            <p>Best active pool selected by live DexScreener volume and liquidity.</p>
+            <dl class="intel-list">
+              <div><dt>DEX</dt><dd id="pool-dex">Syncing</dd></div>
+              <div><dt>Pool liquidity</dt><dd id="pool-liquidity">--</dd></div>
+              <div><dt>FDV</dt><dd id="pool-fdv">--</dd></div>
+              <div><dt>Pair created</dt><dd id="pool-created">--</dd></div>
+            </dl>
+            <a class="secondary-button block" href="https://dexscreener.com/solana/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Open pool</a>
+          </article>
+          <article class="intel-card holder-card" data-glass>
+            <div class="intel-kicker">Holder pulse</div>
+            <h3 id="holder-count">Community loading</h3>
+            <p>Holder count is a live-ready panel with graceful fallback when public APIs rate-limit.</p>
+            <div class="holder-bars" aria-label="Holder concentration visualization">
+              <span style="--h: 86%"></span><span style="--h: 64%"></span><span style="--h: 51%"></span><span style="--h: 39%"></span><span style="--h: 26%"></span>
+            </div>
+            <a class="secondary-button block" href="https://solscan.io/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">View holders</a>
+          </article>
+          <article class="intel-card bubble-map" data-glass>
+            <div class="intel-kicker">Bubble map</div>
+            <h3>Wallet clusters</h3>
+            <p>Tap bubbles to build conviction streaks. Use the external map for real holder graphing.</p>
+            <div class="bubble-orbit" id="bubble-orbit" aria-label="Interactive wallet bubble map">
+              <button style="--x: 20%; --y: 38%; --s: 88px">LP</button>
+              <button style="--x: 48%; --y: 22%; --s: 64px">CEX</button>
+              <button style="--x: 71%; --y: 48%; --s: 104px">Whale</button>
+              <button style="--x: 38%; --y: 66%; --s: 54px">Chads</button>
+              <button style="--x: 62%; --y: 78%; --s: 70px">Meme</button>
+            </div>
+            <a class="secondary-button block" href="https://app.bubblemaps.io/sol/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Open BubbleMaps</a>
+          </article>
+          <article class="intel-card safety-card" data-glass>
+            <div class="intel-kicker">Trench checklist</div>
+            <h3>Verify before sending.</h3>
+            <ul class="checklist">
+              <li>Confirm the mint matches the copied CA.</li>
+              <li>Inspect liquidity, volume, buys, sells, and top holders.</li>
+              <li>Use small sizing. Memecoin volatility is not a feature bug.</li>
+              <li>Never trust DMs, fake airdrops, or lookalike links.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="game-section section-snap" id="game" data-section="game">
+        <div class="game-shell" data-glass>
+          <div class="game-copy">
+            <p class="handle">PLAY TO SEND</p>
+            <h2>Black Bull Run</h2>
+            <span>Steer the bull, collect green candles, dodge red rugs, and unlock the buy route when your streak heats up.</span>
+            <div class="game-stats">
+              <div><b id="game-score">0</b><small>Score</small></div>
+              <div><b id="game-streak">0x</b><small>Streak</small></div>
+              <div><b id="game-best">0</b><small>Best</small></div>
+            </div>
+            <div class="game-actions">
+              <button class="primary-button magnetic" id="start-game" type="button">Start run</button>
+              <a class="secondary-button" id="game-buy" href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Unlock buy boost</a>
+            </div>
+          </div>
+          <div class="game-stage">
+            <canvas id="bull-game" width="760" height="430" aria-label="Black Bull Run arcade game"></canvas>
+            <p>Controls: mouse / touch / arrow keys. Green candles add points. Red rugs reset streak.</p>
+          </div>
         </div>
       </section>
 
