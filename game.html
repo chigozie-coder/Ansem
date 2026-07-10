@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Play Black Bull Run, the $ANSEM arcade experience." /><title>Black Bull Run | $ANSEM Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet" /><link rel="stylesheet" href="styles.css" />
+</head>
+<body class="arcade-page">
+  <header class="arcade-nav"><a href="index.html">← Home</a><b>BLACK BULL RUN</b><a href="token.html">Token Intel</a></header>
+  <main class="arcade-shell">
+    <section class="arcade-hud"><div><span>SCORE</span><b id="a-score">00000</b></div><div><span>STREAK</span><b id="a-streak">0×</b></div><div><span>LEVEL</span><b id="a-level">01</b></div><div><span>BEST</span><b id="a-best">00000</b></div><div class="shield-stat"><span>SHIELD</span><b id="a-shield">●●●</b></div></section>
+    <section class="arcade-stage-wrap">
+      <canvas id="arcade" width="1440" height="810" aria-label="Black Bull Run game"></canvas>
+      <div class="arcade-overlay" id="arcade-overlay"><img src="assets/reference-bull.webp" alt="3D Black Bull" /><p>THE TRENCHES ARE OPEN</p><h1>BLACK BULL<br /><em>RUN</em></h1><span>Collect green candles · Dodge rugs · Grab shields · Chain the streak</span><button id="play-game" type="button">START THE RUN</button><small>Arrow keys / WASD / drag on mobile</small></div>
+      <button class="pause-game" id="pause-game" type="button" aria-label="Pause game">Ⅱ</button>
+      <div class="mobile-controls"><button data-move="left">←</button><button data-move="up">↑</button><button data-move="down">↓</button><button data-move="right">→</button></div>
+    </section>
+    <section class="arcade-footer"><span id="mission">MISSION: Reach a 10× streak</span><div><button id="mute-game" type="button">SOUND: ON</button><a href="https://jup.ag/swap/SOL-9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">BUY $ANSEM ↗</a></div></section>
+  </main><script type="module" src="game.js"></script>
+</body>
+</html>

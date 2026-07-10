@@ -238,7 +238,7 @@ const hydrateMarket = async () => {
     $("#pool-liquidity").textContent = `$${compact(pair.liquidity?.usd)}`;
     $("#pool-fdv").textContent = `$${compact(pair.fdv || pair.marketCap)}`;
     $("#pool-created").textContent = formatDate(pair.pairCreatedAt);
-    $("#holder-count").textContent = `${compact(Math.max(420, Math.round(txns * 7.6)))} active watchers`;
+    $("#holder-count").textContent = `${compact(txns)} trades / 24H`;
     buildSparkline(Math.max(0.35, Math.min(0.95, state.marketPulse)));
   } catch (error) {
     $("#live-dot").textContent = "Cached";
@@ -247,7 +247,7 @@ const hydrateMarket = async () => {
     $("#strength-copy").textContent = "DexScreener did not answer, so the page is showing fallback momentum UI.";
     $("#pool-dex").textContent = "Cached";
     $("#pool-liquidity").textContent = "API cooling";
-    $("#holder-count").textContent = "Trench watchers";
+    $("#holder-count").textContent = "Activity unavailable";
   }
 };
 
