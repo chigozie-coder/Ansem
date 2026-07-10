@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Live $ANSEM token intelligence: price, liquidity pools, volume, transactions, chart, holders and wallet maps." />
+  <title>$ANSEM Token Intel | The Black Bull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="terminal-page">
+  <header class="site-header" data-glass>
+    <a href="index.html" class="brand"><span class="brand-mark"><img src="assets/logo-bull.webp" alt="" /></span><span><strong>ANSEM</strong><small>Token terminal</small></span></a>
+    <nav class="desktop-nav"><a href="index.html">Home</a><a href="#overview">Overview</a><a href="#chart">Chart</a><a href="#pools">Pools</a><a href="#holders">Holders</a><a href="game.html">Arcade</a></nav>
+    <a class="header-cta" data-buy target="_blank" rel="noreferrer">Buy $ANSEM</a>
+  </header>
+  <main class="terminal-main">
+    <section class="terminal-hero" id="overview">
+      <div><p class="handle"><span class="status-pulse"></span> LIVE SOLANA MARKET FEED</p><h1>$ANSEM<br /><em>INTEL.</em></h1><p>Real pool data. Real order flow. No invented holder metrics.</p></div>
+      <div class="terminal-price" data-glass><span>The Black Bull / USD</span><strong id="t-price">Syncing</strong><b id="t-change">Connecting to DexScreener</b><small id="t-updated">Live refresh every 30 seconds</small></div>
+    </section>
+    <section class="metric-strip" aria-label="Live token metrics">
+      <article><span>Market cap</span><b id="t-mcap">--</b></article><article><span>Total liquidity</span><b id="t-liq">--</b></article><article><span>24H volume</span><b id="t-vol">--</b></article><article><span>24H transactions</span><b id="t-txns">--</b></article><article><span>Buy / sell ratio</span><b id="t-ratio">--</b></article>
+    </section>
+    <section class="terminal-grid" id="chart">
+      <article class="live-chart-card" data-glass><div class="terminal-card-head"><div><span>LIVE CHART</span><h2 id="chart-pair">ANSEM / SOL</h2></div><a id="dex-link" target="_blank" rel="noreferrer">Open DexScreener ↗</a></div><iframe id="dex-chart" title="Live ANSEM DexScreener chart" loading="lazy"></iframe></article>
+      <aside class="flow-card" data-glass><div class="terminal-card-head"><div><span>ORDER FLOW</span><h2>Buy pressure</h2></div></div><div class="range-tabs" id="range-tabs"><button data-range="m5">5M</button><button data-range="h1">1H</button><button data-range="h6">6H</button><button class="is-active" data-range="h24">24H</button></div><div class="flow-ring" id="flow-ring" style="--buy:50"><strong id="flow-percent">50%</strong><span>buys</span></div><dl class="intel-list"><div><dt>Buys</dt><dd id="flow-buys">--</dd></div><div><dt>Sells</dt><dd id="flow-sells">--</dd></div><div><dt>Volume</dt><dd id="flow-volume">--</dd></div><div><dt>Price change</dt><dd id="flow-change">--</dd></div></dl></aside>
+    </section>
+    <section class="pools-section" id="pools"><div class="section-heading wide"><p>LIQUIDITY ROUTES</p><h2>Every active pool.</h2><span>Ranked by liquidity, sourced live from DexScreener. Select a pool to open its chart.</span></div><div class="pool-table" data-glass><div class="pool-row pool-head"><span>Pool</span><span>DEX</span><span>Liquidity</span><span>24H volume</span><span>24H txns</span><span></span></div><div id="pool-rows"><div class="pool-loading">Loading active pools…</div></div></div></section>
+    <section class="holder-terminal" id="holders">
+      <div class="holder-truth" data-glass><p class="handle">HOLDER TRANSPARENCY</p><h2>Verify wallets, not vibes.</h2><p>Free market feeds do not return an accurate holder count. Instead of estimating one from trades, use the chain explorers below for the current owner list and concentration.</p><div class="holder-links"><a href="https://solscan.io/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump#holders" target="_blank" rel="noreferrer">Holder list on Solscan ↗</a><a href="https://app.bubblemaps.io/sol/token/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Wallet clusters on BubbleMaps ↗</a><a href="https://rugcheck.xyz/tokens/9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump" target="_blank" rel="noreferrer">Risk scan on RugCheck ↗</a></div></div>
+      <div class="contract-terminal" data-glass><span>VERIFIED MINT</span><code>9cRCn9rGT8V2imeM2BaKs13yhMEais3ruM3rPvTGpump</code><button id="terminal-copy" type="button">Copy address</button><small>Always match this address before swapping.</small></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><script type="module" src="terminal.js"></script>
+</body>
+</html>
